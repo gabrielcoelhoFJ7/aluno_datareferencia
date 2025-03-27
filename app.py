@@ -14,15 +14,18 @@ spec.register(app)
 @app.route('/validadealunos/<dia>-<mes>-<ano>/<validade>')
 def validado(prazo, formato):
     if formato == 'dia':
-
-    meses = datetime.today()+relativedelta(months=prazo)
-    print(meses)
+        dias = datetime.today() + relativedelta(days=prazo)
+    elif formato == 'semana':
+    elif formato == 'mes':
+        meses = datetime.today()+relativedelta(months=prazo)
+    elif formato == 'ano':
+        anos = datetime.today()+relativedelta(years=prazo)
     # years=
     anos = ''
     # weeks=
     semanas = ''
     # days=
-    dias = ''
+
 
     return ({'antes': (datetime.today().strftime("%d-%m-%Y")),
             'dias': (dias),
