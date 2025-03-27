@@ -11,20 +11,22 @@ spec = FlaskPydanticSpec('flask',
                          version='1.0.0')
 spec.register(app)
 
-@app.route('/validadealunos/<dia>-<mes>-<ano>/<validade>')
+@app.route('/validadealunos/<prazo>/<formato>')
 def validado(prazo, formato):
     if formato == 'dia':
         dias = datetime.today() + relativedelta(days=prazo)
     elif formato == 'semana':
+        semanas = datetime.today() + relativedelta(weeks=prazo)
     elif formato == 'mes':
-        meses = datetime.today()+relativedelta(months=prazo)
+        meses = datetime.today() + relativedelta(months=prazo)
     elif formato == 'ano':
-        anos = datetime.today()+relativedelta(years=prazo)
-    # years=
-    anos = ''
-    # weeks=
-    semanas = ''
-    # days=
+        anos = datetime.today() + relativedelta(years=prazo)
+    else:
+        jsonify({
+            'Error': 'formato invalido, tente "dia", "semana", "mes", "ano"',
+        })
+
+
 
 
     return ({'antes': (datetime.today().strftime("%d-%m-%Y")),
